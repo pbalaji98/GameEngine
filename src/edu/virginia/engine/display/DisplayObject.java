@@ -55,6 +55,8 @@ public class DisplayObject {
 		this.setImage(fileName);
 	}
 
+	public void setParent(Reference ref) { this.parent = ref;}
+	public Reference getParent() {return this.parent;}
 	public void setId(String id) {
 		this.id = id;
 	}
