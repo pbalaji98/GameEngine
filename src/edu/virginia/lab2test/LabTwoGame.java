@@ -17,6 +17,8 @@ import java.lang.Math;
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
  * */
+
+//test knskn
 public class LabTwoGame extends Game{
 
 	private GameClock visibilityToggleClock = new GameClock();
@@ -132,6 +134,3 @@ public class LabTwoGame extends Game{
 	public static void main(String[] args) {
 		LabTwoGame game = new LabTwoGame();
 		game.start();
-
-	}
-}
