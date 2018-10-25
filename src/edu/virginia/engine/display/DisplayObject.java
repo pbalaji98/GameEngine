@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.Reference;
 import java.util.ArrayList;
 import java.awt.Point;
 import java.awt.AlphaComposite;
@@ -16,6 +17,8 @@ import javax.imageio.ImageIO;
  * 
  * */
 public class DisplayObject {
+
+	private Reference parent;
 
 	/* All DisplayObject have a unique id */
 	private String id;
