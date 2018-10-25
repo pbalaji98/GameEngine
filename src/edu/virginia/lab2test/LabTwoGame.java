@@ -18,7 +18,6 @@ import java.lang.Math;
  * although, for now, it won't be a very fun game :)
  * */
 
-//test knskn
 public class LabTwoGame extends Game{
 
 	private GameClock visibilityToggleClock = new GameClock();
@@ -134,3 +133,4 @@ public class LabTwoGame extends Game{
 	public static void main(String[] args) {
 		LabTwoGame game = new LabTwoGame();
 		game.start();
+	}}
