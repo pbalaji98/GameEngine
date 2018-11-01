@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 
@@ -27,10 +29,12 @@ public class DisplayObjectContainer extends DisplayObject {
     }
 
     public void addChild(DisplayObject child) {
+        child.setParent(this);
         children.add(child);
     }
 
     public void addChildAtIndex(DisplayObject child, int i) {
+        child.setParent(this);
         children.add(i,child);
     }
 
