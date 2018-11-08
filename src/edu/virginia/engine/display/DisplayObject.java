@@ -1,16 +1,12 @@
 package edu.virginia.engine.display;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.awt.Point;
-import java.awt.AlphaComposite;
-
 import javax.imageio.ImageIO;
 
 /**
@@ -39,9 +35,10 @@ public class DisplayObject {
 
 	private double scaleY = 1;
 
+	private Shape hitbox;
+
 	/* The image that is displayed by this object */
 	private BufferedImage displayImage;
-
 
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
@@ -112,6 +109,26 @@ public class DisplayObject {
 
 	public void setScaleY(double scaleY) {
 		this.scaleY = scaleY;
+	}
+
+	public void setHitbox(int type) {
+		switch(type) {
+			case 1:
+				this.hitbox = new Rectangle((int)scaleX*this.position.x, (int)scaleY*this.position.y, (int)scaleX*this.getUnscaledWidth(), (int)scaleY*this.getUnscaledHeight());
+				break;
+			default:
+				this.hitbox = new Rectangle((int)scaleX*this.position.x, (int)scaleY*this.position.y, (int)scaleX*this.getUnscaledWidth(), (int)scaleY*this.getUnscaledHeight());
+				break;
+		}
+
+		}
+
+	public Shape getHitbox() {
+		return this.hitbox;
+	}
+
+	public boolean collidesWith(DisplayObject other) {
+		return other.hitbox.intersects((double)this.hitbox.getBounds().x, (double)this.hitbox.getBounds().y, (double)this.hitbox.getBounds().width,  (double)this.hitbox.getBounds().height);
 	}
 
 	public Point localToGlobal(Point p) {
