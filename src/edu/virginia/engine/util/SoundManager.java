@@ -15,14 +15,17 @@ import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 public class SoundManager {
     private HashMap sound_map = new HashMap();
     private HashMap music_map = new HashMap();
-    private Clip myClip;
+    private Clip soundClip;
+    private Clip musicClip;
     public void LoadSoundEffect(String id, String filename) {
         sound_map.put(id, filename);
     }
-    public void PlaySoundEffect(String id) {
-        Media hit = new Media(new File(String.valueOf(sound_map.get(id))).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.play();
+    public void PlaySoundEffect(String id) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
+        soundClip = AudioSystem.getClip();
+        AudioInputStream ais = getAudioInputStream(new File(String.valueOf(sound_map.get(id))));
+        soundClip.open(ais);
+        soundClip.start();
+        Thread.sleep(8);
 
     }
 
@@ -30,11 +33,21 @@ public class SoundManager {
         music_map.put(id, filename);
     }
 
-    public void PlayMusic(String id) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-        AudioInputStream mus = getAudioInputStream(new File(String.valueOf(music_map.get(id))));
-        myClip.open(mus);
-        myClip.start();
-        myClip.loop(Clip.LOOP_CONTINUOUSLY);
+    public void PlayMusic(String id) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
+        musicClip = AudioSystem.getClip();
+        AudioInputStream ais = getAudioInputStream(new File(String.valueOf(music_map.get(id))));
+        musicClip.open(ais);
+        musicClip.start();
+        while(true) {
+            Thread.sleep(1000);
+            musicClip.loop(-1);
+        }
+    }
+
+    public static void main(String args[]) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+        SoundManager x = new SoundManager();
+        x.LoadSoundEffect("game", "resources/hit.wav");
+        x.PlaySoundEffect("game");
     }
 
 }
