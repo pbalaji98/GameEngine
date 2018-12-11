@@ -13,8 +13,8 @@ import javax.sound.sampled.*;
 import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 
 public class SoundManager {
-    private HashMap sound_map = new HashMap();
-    private HashMap music_map = new HashMap();
+    private HashMap<String,String> sound_map = new HashMap<String,String>();
+    private HashMap<String,String> music_map = new HashMap<String,String>();
     private Clip soundClip;
     private Clip musicClip;
     public void LoadSoundEffect(String id, String filename) {
@@ -38,16 +38,18 @@ public class SoundManager {
         AudioInputStream ais = getAudioInputStream(new File(String.valueOf(music_map.get(id))));
         musicClip.open(ais);
         musicClip.start();
-        while(true) {
-            Thread.sleep(1000);
+        musicClip.loop(-1);
+        /*while(i==0) {
+            //Thread.sleep(1000);
             musicClip.loop(-1);
-        }
+            i++;
+        }*/
     }
 
-    public static void main(String args[]) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+    /*public static void main(String args[]) throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
         SoundManager x = new SoundManager();
         x.LoadSoundEffect("game", "resources/hit.wav");
         x.PlaySoundEffect("game");
-    }
+    }*/
 
 }
